@@ -32,7 +32,7 @@ public class FibTest {
         int i = 5;
         //备忘录
         fibTest.fib(i, memo);
-        //自顶向下
+        //自底向上，由已知推未知
         fibTest.fib(i);
     }
 }
