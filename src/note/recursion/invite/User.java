@@ -1,4 +1,4 @@
-package test.recursion.invite;
+package note.recursion.invite;
 
 class User {
     private Integer userId;//用户的id

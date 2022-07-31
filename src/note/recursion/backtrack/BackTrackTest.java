@@ -1,4 +1,4 @@
-package test.recursion.backtrack;
+package note.recursion.backtrack;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

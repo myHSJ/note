@@ -1,4 +1,4 @@
-package test.recursion.loop;
+package note.recursion.loop;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package test.recursion.tree;
+package note.recursion.tree;
 
 
 import java.util.LinkedList;

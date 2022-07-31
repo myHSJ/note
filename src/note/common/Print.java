@@ -1,4 +1,4 @@
-package test.common;
+package note.common;
 
 import java.util.List;
 

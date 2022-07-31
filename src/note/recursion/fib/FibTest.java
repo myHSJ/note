@@ -1,4 +1,4 @@
-package test.recursion.fib;
+package note.recursion.fib;
 
 import java.util.HashMap;
 import java.util.Map;
