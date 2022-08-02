@@ -1,5 +1,8 @@
 package pattern;
 
+import lombok.Data;
+
+@Data
 public class User {
     private String userId;
     private String isVip;//Y是 N不是
@@ -10,30 +13,6 @@ public class User {
         this.isVip = isVip;
         this.newFlag = newFlag;
 
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getIsVip() {
-        return isVip;
-    }
-
-    public void setIsVip(String isVip) {
-        this.isVip = isVip;
-    }
-
-    public String getNewFlag() {
-        return newFlag;
-    }
-
-    public void setNewFlag(String newFlag) {
-        this.newFlag = newFlag;
     }
 
     /**

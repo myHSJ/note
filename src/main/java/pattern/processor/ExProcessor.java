@@ -12,7 +12,7 @@ public class ExProcessor extends Processor {
 
     @Override
     SendRst execute(SendRequest sendRequest) {
-        Coupon coupon = DB.findCouponByType("EX");
+        Coupon coupon = DB.findCouponByType(CouponType.EX);
         System.out.println(String.format("[%s] 发送兑换券给 ", coupon.getName()) + sendRequest.getUserId() + "用户");
         SendRst sendRst = newSendRst(sendRequest);
 
