@@ -6,7 +6,7 @@ import pattern.*;
 public class ScoreProcessor extends Processor {
     @Override
     SendRst execute(SendRequest sendRequest) {
-        Coupon coupon = DB.findCouponByType("SC");
+        Coupon coupon = DB.findCouponByType(CouponType.SC);
         System.out.println(String.format("[%s]发送积分给 ", coupon.getName()) + sendRequest.getUserId() + "用户");
 
         SendRst sendRst = newSendRst(sendRequest);

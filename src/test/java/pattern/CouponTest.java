@@ -1,25 +1,25 @@
 package pattern;
 
+import org.junit.jupiter.api.Test;
+import pattern.DB;
+import pattern.SendRequest;
+import pattern.User;
 import pattern.factory.ProcessorFactory;
 import pattern.processor.Processor;
+
 import java.util.List;
 
+public class CouponTest {
 
-public class TestCoupon {
+    User newUser = new User("test1", "N", "Y");
+    User vipUser = new User("test2", "Y", "N");
+    User normalUser = new User("test3", "N", "N");
 
-    public static void main(String[] args) {
-
-
-        User newUser = new User("test1", "N", "Y");
-        User vipUser = new User("test2", "Y", "N");
-        User normalUser = new User("test3", "N", "N");
-
-        TestCoupon testCoupon = new TestCoupon();
-        testCoupon.sendCoupon(newUser);
-
+    @Test
+    void testSendCoupon() {
+        sendCoupon(newUser);
         System.out.println("==打印数据库信息==");
         DB.info();
-
     }
 
     private void sendCoupon(User user) {
@@ -33,6 +33,4 @@ public class TestCoupon {
         }
 
     }
-
-
 }

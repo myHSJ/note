@@ -8,32 +8,32 @@ import java.util.Map;
 public class DB {
     public static Map<String, List<CouponLine>> couponSendTable = new HashMap<>();
 
-    private static Map<String, Coupon> couponTable = new HashMap<>();
+    private static Map<CouponType, Coupon> couponTable = new HashMap<>();
 
     static {
 
         Coupon frCoupon = new Coupon();
         frCoupon.setCode("FR001");
-        frCoupon.setType("FR");
+        frCoupon.setType(CouponType.FR);
         frCoupon.setName("满减券");
         couponTable.put(frCoupon.getType(), frCoupon);
 
         Coupon exCoupon = new Coupon();
         exCoupon.setCode("EX001");
-        exCoupon.setType("EX");
+        exCoupon.setType(CouponType.EX);
         exCoupon.setCount(10);
         exCoupon.setName("兑换券");
         couponTable.put(exCoupon.getType(), exCoupon);
 
         Coupon scoreCoupon = new Coupon();
         scoreCoupon.setCode("SC001");
-        scoreCoupon.setType("SC");
+        scoreCoupon.setType(CouponType.SC);
         scoreCoupon.setName("积分券");
         couponTable.put(scoreCoupon.getType(), scoreCoupon);
 
     }
 
-    public static Coupon findCouponByType(String type) {
+    public static Coupon findCouponByType(CouponType type) {
         return couponTable.get(type);
     }
 
