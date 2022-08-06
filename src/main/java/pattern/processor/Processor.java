@@ -3,6 +3,9 @@ package pattern.processor;
 
 import pattern.SendRequest;
 import pattern.SendRst;
+import pattern.msg.MessageSender;
+import pattern.msg.SendMsgReq;
+import pattern.msg.SendType;
 
 import java.util.UUID;
 
@@ -20,7 +23,14 @@ public abstract class Processor {
     abstract SendRst execute(SendRequest sendRequest);
 
     private void sendMsgToMQ(SendRst sendRst) {
-        System.out.println(String.format("[%s]将发放的消息通知给MQ: ", sendRst.getCoupon().getName()) + sendRst);
+        String msg = String.format("[%s]将发放的消息通知给MQ: ", sendRst.getCoupon().getName()) + sendRst;
+        MessageSender.send(
+                SendMsgReq.builder()
+                        .userId(sendRst.getUserId())
+                        .msgBody(msg)
+                        .sendType(SendType.MQ)
+                        .build()
+        );
         System.out.println();
     }
 

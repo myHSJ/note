@@ -4,6 +4,9 @@ package pattern.processor;
 import pattern.*;
 
 public class FrProcessor extends Processor {
+
+
+
     @Override
     SendRst execute(SendRequest sendRequest) {
         Coupon coupon = DB.findCouponByType(CouponType.FR);
