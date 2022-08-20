@@ -16,7 +16,8 @@ public class LoopPrintAbcTest {
         public void run() {
             synchronized (obj) {
                 for (int i = 0; i < 10; i++) {
-                    //state是递增的，所以其余的两个线程都会在下面的wait方法阻塞
+                    //state是递增的，notifyAll唤起其他线程
+                    //当线程获取锁后如果不满足以下while条件则释放锁，然后进行阻塞
                     while (state % 3 != which) {
                         try {
                             obj.wait();

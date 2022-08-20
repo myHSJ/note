@@ -23,13 +23,13 @@ public class CacheResource extends Resource<Map<String, String>> {
     //读写锁
     public String apply(String key) {
         String res = null;
-        r.lock();
+        readLock.lock();
         try {
             res = data.get(key);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            r.unlock();
+            readLock.unlock();
         }
 
         if (Objects.nonNull(res)) {
@@ -37,7 +37,7 @@ public class CacheResource extends Resource<Map<String, String>> {
             return res;
         }
 
-        w.lock();
+        writeLock.lock();
         try {
             res = db.get(key);
             if (!data.containsKey(key)) {
@@ -50,7 +50,7 @@ public class CacheResource extends Resource<Map<String, String>> {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            w.unlock();
+            writeLock.unlock();
         }
 
         return res;

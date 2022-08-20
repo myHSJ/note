@@ -8,11 +8,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockResource extends Resource<LinkedList<String>> {
 
-    ThreadLocal<Integer> counter = ThreadLocal.withInitial(() -> 1);
-
     private int limit = 10;
     public final ReentrantLock reentrantLock = new ReentrantLock();
 
+    //声明condition是为了当满足条件时，将对应的线程阻塞
     Condition full = reentrantLock.newCondition();
     Condition empty = reentrantLock.newCondition();
 
@@ -23,7 +22,7 @@ public class ReentrantLockResource extends Resource<LinkedList<String>> {
             while (data.size() >= limit) {
                 try {
                     System.out.println(currentThreadName() + "第 " + idx + "次添加元素，List已满，等待添加元素");
-                    full.await();
+                    full.await();//
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

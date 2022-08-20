@@ -1,24 +1,45 @@
-package lock;
+package pattern;
 
-import lock.ps.*;
+import lock.CacheResource;
+import lock.CountResource;
+import lock.Resource;
+import lock.Worker;
+import lock.ps.BlockQueueResource;
+import lock.ps.Consumer;
+import lock.ps.Producer;
 import lock.style.ReadWriteRawLock;
+import lock.style.SynchronizedLock;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class JavaLock {
+public class LockTest {
 
-    public static void main(String[] args) throws Exception {
 
+    //测试多线程累计器，多种加锁方式
+    @Test
+    public void testMultipleLockStyle() throws Exception {
         //counter
-        //counter();
+        List<Thread> threadList = new ArrayList<>();
+        Resource resource = new CountResource();
+        resource.setLockStyle(SynchronizedLock.class);
+        runWithThread(resource, threadList);
+    }
 
+    //测试读写锁
+    @Test
+    public void testReadWriteLock() throws Exception {
         //cache
-        //getCache();
+        getCache();
+    }
 
-        //
+
+    @Test
+    public void testConsumerProducer() throws Exception {
         consumerAndProducer();
     }
+
 
     public static void counter() {
         List<Thread> threadList = new ArrayList<>();
@@ -30,7 +51,6 @@ public class JavaLock {
         try {
             List<Thread> threadList = new ArrayList<>();
             BlockQueueResource resource = new BlockQueueResource();
-            //resource.setData(new LinkedList<>());
             resource.setData(new ArrayBlockingQueue(3));
             runWithConsumer(resource, threadList);
             runWithProducer(resource, threadList);
@@ -105,6 +125,5 @@ public class JavaLock {
             ex.printStackTrace();
         }
     }
-
 
 }

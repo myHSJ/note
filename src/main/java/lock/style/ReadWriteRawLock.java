@@ -10,12 +10,7 @@ public class ReadWriteRawLock extends Worker implements LockStyle {
      * Java reentrantLock
      */
     public void lockAndRun(Resource resource) {
-        try {
-            resource.reentrantLock.lock();
-            resource.apply(resource.getKey());
-        } finally {
-            resource.reentrantLock.unlock();
-        }
+        resource.apply(resource.getKey());
     }
 
 

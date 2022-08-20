@@ -20,7 +20,7 @@ public class Worker implements Runnable {
     public Worker() {
     }
 
-    Worker(Resource resource) {
+    public Worker(Resource resource) {
         this.resource = resource;
     }
 

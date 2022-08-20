@@ -7,8 +7,10 @@ public class SynchronizedLock extends Worker implements LockStyle {
 
     @Override
     public void lockAndRun(Resource resource) {
-        //类锁：synchronized (this) 等同于  synchronized (Worker.class)
-        //对象锁：synchronized(resource)，其中resource为上面的传进来的资源实体
+        //synchronized (this) 是在所在类的对象加锁
+        //synchronized (Worker.class) 是给指定的类加锁
+        //普通方法synchronized加锁的对象this，如果是静态方法则加锁的对象是当前类
+        //Object obj = new Object();synchronized(obj)，给指定的对象加锁
         synchronized (SynchronizedLock.class) {
             resource.apply();
         }
