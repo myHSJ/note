@@ -7,9 +7,11 @@ import lock.Worker;
 import lock.ps.BlockQueueResource;
 import lock.ps.Consumer;
 import lock.ps.Producer;
+import lock.style.RedisDistributeLock;
 import lock.style.ReadWriteRawLock;
 import lock.style.SynchronizedLock;
 import org.junit.jupiter.api.Test;
+import redis.clients.jedis.Jedis;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -34,10 +36,38 @@ public class LockTest {
         getCache();
     }
 
-
+    //测试消费和生产者
     @Test
     public void testConsumerProducer() throws Exception {
         consumerAndProducer();
+    }
+
+    //redis分布式锁
+    @Test
+    public void testRedis() throws Exception {
+        Jedis conn = new Jedis("localhost", 6379);
+        conn.set("qwe", "test");
+        Object res = conn.get("qwe");
+        System.out.println(res);
+    }
+
+    //redis分布式锁
+    @Test
+    public void testRedisLock() throws Exception {
+        try {
+            List<Thread> threadList = new ArrayList<>();
+            Resource resource = new CountResource();
+            resource.setKey("lock-1");
+            resource.setData(0);
+            resource.setLockStyle(RedisDistributeLock.class);
+            runWithThread(resource, threadList);
+
+            for (Thread thread : threadList) {
+                thread.join();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

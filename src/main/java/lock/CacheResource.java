@@ -20,8 +20,25 @@ public class CacheResource extends Resource<Map<String, String>> {
 
     }
 
+
+    public String readData(String key) {
+        String res = null;
+        return data.get(key);
+    }
+
+    public void writeData(String key) {
+        String res = null;
+        res = db.get(key);
+        if (!data.containsKey(key)) {
+            System.out.println(currentThreadName() + "设置了缓存" + key);
+            data.put(key, res);
+        } else {
+            System.out.println(currentThreadName() + "数据库中 key " + key + "的值为：" + res);
+        }
+    }
+
     //读写锁
-    public String apply(String key) {
+   /* public String apply(String key) {
         String res = null;
         readLock.lock();
         try {
@@ -54,5 +71,5 @@ public class CacheResource extends Resource<Map<String, String>> {
         }
 
         return res;
-    }
+    }*/
 }

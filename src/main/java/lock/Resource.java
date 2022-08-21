@@ -18,11 +18,6 @@ public abstract class Resource<U> {
     //显示锁
     public final ReentrantLock reentrantLock = new ReentrantLock();
 
-    //读写锁
-    public static final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    public final Lock readLock = readWriteLock.readLock();
-    public final Lock writeLock = readWriteLock.writeLock();
-
     private Class<?> lockStyle;
 
     private String key;

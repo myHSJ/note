@@ -13,6 +13,7 @@ public class Worker implements Runnable {
         styleMap.put(ReentrantTryLock.class, new ReentrantTryLock());
         styleMap.put(SynchronizedLock.class, new SynchronizedLock());
         styleMap.put(ReadWriteRawLock.class, new ReadWriteRawLock());
+        styleMap.put(RedisDistributeLock.class, new RedisDistributeLock());
     }
 
     protected Resource resource;
