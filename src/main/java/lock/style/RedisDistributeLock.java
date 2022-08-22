@@ -17,7 +17,6 @@ public class RedisDistributeLock extends Worker implements LockStyle {
     //加锁的时间要足够长
     public final static String LOCK_SCRIPT = "if redis.call('setnx', KEYS[1], ARGV[1]) == 1 then redis.call('pexpire', KEYS[1], ARGV[2]) return 1 else return 0 end ";
     public final static String UNLOCK_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
-    public final static String LOCK_KEY = "lock-1";
 
     static {
         jedisPool = new JedisPool("localhost", 6379);
@@ -98,7 +97,7 @@ public class RedisDistributeLock extends Worker implements LockStyle {
     /*lua解锁*/
     public static boolean luaRedisUnLock(Jedis jedis, String key, String requestId) {
         if (requestId == null) return false;
-        //比对id，避免其他线程的锁给被释放
+        //比对id，避免其他线程的锁被释放
         Object obj = jedis.eval(UNLOCK_SCRIPT, Arrays.asList(key), Arrays.asList(requestId));
         return obj.toString().equals("1");
     }
